@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
 
             var customers = new List<Customer>
             {
-    
+
             };
 
             var viewMovel = new RandomMovieViewModel
@@ -28,20 +28,24 @@ namespace WebApplication1.Controllers
             return View(viewMovel);
         }
 
-        public IActionResult Edit(int id)
-        {
-            return Content("id=" + id);
-        }
 
         public IActionResult Index(int? pageIndex, string sortBy)
         {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
+            var movies = GetMovies();
+            if (movies == null)
+            {
+                return NotFound();
+            }
+            return View(movies);
+        }
 
-            if (String.IsNullOrWhiteSpace(sortBy))
-                sortBy = "Name";
-
-            return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+        private IEnumerable<Movie> GetMovies()
+        {
+            return new List<Movie>
+            {
+                new Movie { Id = 0, Name = "Slark"},
+                new Movie { Id = 1 , Name = "Flash"}
+            };
         }
 
         [Route("movies/released/{year:int:regex(\\d{{4}})}/{month:int:range(1, 12)}")]
