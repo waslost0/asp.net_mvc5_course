@@ -9,7 +9,7 @@ namespace WebApplication1.Models
     {
         public byte Id { get; set; }
         public short SignUpFee { get; set; }
-        public byte DurationInMOnths { get; set; }
+        public byte DurationInMonths { get; set; }
         public byte DiscountRate { get; set; }
 
 

@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20200418183529_AddMembershipType.cs" />
+    <Compile Remove="Data\Migrations\20200418183529_AddMembershipType.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200419161913_ApplyAnnotationsToCustomerName.cs" />
+    <Compile Remove="Data\Migrations\20200419161913_ApplyAnnotationsToCustomerName.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200419162242_ApplyAnnotationsToCustomerName.cs" />
+    <Compile Remove="Data\Migrations\20200419162242_ApplyAnnotationsToCustomerName.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200419162752_AddCustomersDb.cs" />
+    <Compile Remove="Data\Migrations\20200419162752_AddCustomersDb.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.3" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.3" />

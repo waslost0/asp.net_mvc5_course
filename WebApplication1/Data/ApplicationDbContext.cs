@@ -15,6 +15,8 @@ namespace WebApplication1.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
+       
 
     }
 }
