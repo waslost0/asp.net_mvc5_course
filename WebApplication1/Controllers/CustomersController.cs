@@ -26,7 +26,7 @@ namespace WebApplication1.Controllers
 
         public IActionResult Details(int id)
         {
-            var customer = _db.Customers.SingleOrDefault(u => u.Id == id);
+            var customer = _db.Customers.Include(u => u.MembershipType).SingleOrDefault(u => u.Id == id);
 
             if (customer == null)
             {
