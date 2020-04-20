@@ -1,0 +1,15 @@
+﻿@model WebApplication1.Models.Movie
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.Name</h1>
+<ul>
+    @*<li>Genre: @Model.Genre.Name</li>*@
+    <li>Genre: @Model.Genre.Name</li>
+    <li>Release Date: @Model.ReleaseDate.ToString("ddd, MMMM M, yyyy")</li>
+    <li>Date Added: @Model.DateAdded.ToString("ddd, MMMM M, yyyy")</li>
+    <li>Number in Stock: @Model.NumberInStock</li>
+</ul>
+

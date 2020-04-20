@@ -17,6 +17,12 @@
     <Compile Remove="Data\Migrations\20200419162752_AddCustomersDb.Designer.cs" />
     <Compile Remove="Data\Migrations\20200420131742_AddBirthdayColumnToCustomersDb.cs" />
     <Compile Remove="Data\Migrations\20200420131742_AddBirthdayColumnToCustomersDb.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200420135921_AddMovieDb.cs" />
+    <Compile Remove="Data\Migrations\20200420135921_AddMovieDb.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200420143915_AddGenresDb.cs" />
+    <Compile Remove="Data\Migrations\20200420143915_AddGenresDb.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200420144606_EgnreDb.cs" />
+    <Compile Remove="Data\Migrations\20200420144606_EgnreDb.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
