@@ -38,7 +38,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        public IActionResult Index(int? pageIndex, string sortBy)
+        public IActionResult Index()
         {
             var movies = _db.Movies.Include(m => m.Genre).ToList();
             if (movies == null)
@@ -52,6 +52,59 @@ namespace WebApplication1.Controllers
         {
             var movie = _db.Movies.Include(m => m.Genre).SingleOrDefault(m => m.Id == id);
             return View(movie);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var movie = _db.Movies.SingleOrDefault(m => m.Id == id);
+            if (movie == null)
+                return NotFound();
+
+            var genres = _db.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres,
+                Movie = movie
+            };
+
+            return View("MovieForm", viewModel);
+        }
+        public IActionResult New()
+        {
+            var movie = new Movie { };
+            var genres = _db.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genres = genres,
+                Movie = movie
+            };
+
+            return View("MovieForm", viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                movie.DateAdded = DateTime.Now;
+                _db.Movies.Add(movie);
+            }
+            else
+            {
+                _db.Movies.Update(movie);
+                //var customerInDb = _db.Customers.Single(c => c.Id == customer.Id);
+
+                //customerInDb.Name = customer.Name;
+                //customerInDb.Birthdate = customer.Birthdate;
+                //customerInDb.MembershipType = customer.MembershipType;
+                //customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Movies");
         }
 
 

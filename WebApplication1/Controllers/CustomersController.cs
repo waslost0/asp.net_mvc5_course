@@ -22,14 +22,17 @@ namespace WebApplication1.Controllers
         public IActionResult New()
         {
             var membershipTypes = _db.MembershipTypes.ToList();
+            var customer = new Customer { };
             var viewModel = new CustomerFormViewModel
             {
-                MembershipTypes = membershipTypes
+                MembershipTypes = membershipTypes,
+                Customer = customer
             };
 
 
             return View("CustomerForm", viewModel);
         }
+
 
         [HttpPost]
         public IActionResult Save(Customer customer)
@@ -80,11 +83,21 @@ namespace WebApplication1.Controllers
             {
                 Customer = customer,
                 MembershipTypes = _db.MembershipTypes.ToList()
-
             };
 
             return View("CustomerForm", viewModel);
         }
+
+
+        #region APICalls
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var data = await _db.Customers.Include(u => u.MembershipType).ToListAsync(); 
+
+            return Json(new { data = await _db.Customers.ToListAsync() });
+        }
+        #endregion
 
     }
 }
