@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Models;
-
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -18,6 +18,41 @@ namespace WebApplication1.Controllers
         {
             _db = db;
         }
+
+        public IActionResult New()
+        {
+            var membershipTypes = _db.MembershipTypes.ToList();
+            var viewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+
+
+            return View("CustomerForm", viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Save(Customer customer)
+        {
+            if (customer.Id == 0)
+            {
+                _db.Customers.Add(customer);
+            }
+            else
+            {
+                _db.Customers.Update(customer);
+                //var customerInDb = _db.Customers.Single(c => c.Id == customer.Id);
+
+                //customerInDb.Name = customer.Name;
+                //customerInDb.Birthdate = customer.Birthdate;
+                //customerInDb.MembershipType = customer.MembershipType;
+                //customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
+
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Customers");
+        }
+
         public IActionResult Index()
         {
             var customers = _db.Customers.Include(c => c.MembershipType).ToList();
@@ -34,6 +69,21 @@ namespace WebApplication1.Controllers
             }
 
             return View(customer);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var customer = _db.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return NotFound();
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _db.MembershipTypes.ToList()
+
+            };
+
+            return View("CustomerForm", viewModel);
         }
 
     }

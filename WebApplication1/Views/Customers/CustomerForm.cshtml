@@ -1,0 +1,45 @@
+﻿@model WebApplication1.ViewModels.CustomerFormViewModel
+@{
+    ViewData["Title"] = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">@(Model.Customer.Id!=0 ? "Edit":"Create") Customer</h2>
+<br />
+
+
+@using (Html.BeginForm("Save", "Customers"))
+{
+    @if (Model.Customer.Id != 0)
+    {
+        @Html.HiddenFor(m => m.Customer.Id);
+    }
+
+    <div class="form-group" style="width:50%">
+        @Html.LabelFor(m => m.Customer.Name)
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group" style="width:50%">
+        @Html.LabelFor(m => m.Customer.Birthdate)
+        @Html.TextBoxFor(m => m.Customer.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+
+
+    <div class="form-group" style="width:50%">
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+    </div>
+
+
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribed to Newsletters
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
