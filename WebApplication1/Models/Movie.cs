@@ -21,7 +21,7 @@ namespace WebApplication1.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
         public byte NumberInStock { get; set; }
 
     }

@@ -32,11 +32,11 @@
             <tbody>
                 @foreach (var customer in Model)
                 {
-                    <tr>
-                        <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
-                        <td>@customer.MembershipType.DiscountRate%</td>
-                        <td>@customer.MembershipType.Name</td>
-                    </tr>
+                <tr>
+                    <td><a href='/Customers/Edit/@customer.Id' style='cursor:pointer;width:70px'>@customer.Name</a></td>
+                    <td>@customer.MembershipType.DiscountRate%</td>
+                    <td>@customer.MembershipType.Name</td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -61,5 +61,5 @@
 
 @section Scripts
 {
-    <script src="~/js/bookList.js"></script>
+    <script src="~/js/customerList.js"></script>
 }
