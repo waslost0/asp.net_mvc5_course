@@ -84,7 +84,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public IActionResult Save(Movie movie)
         {
 
@@ -96,7 +96,6 @@ namespace WebApplication1.Controllers
                     Movie = movie,
                     Genres = _db.Genres.ToList()
                 };
-
                 return View("MovieForm", viewModel);
             }
             

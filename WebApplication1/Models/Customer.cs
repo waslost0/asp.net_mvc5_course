@@ -17,6 +17,7 @@ namespace WebApplication1.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = @"{0:dd\/MM\/yyyy}")]
+        [Min18YearsIfAMember]
         public DateTime? Birthdate { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }
