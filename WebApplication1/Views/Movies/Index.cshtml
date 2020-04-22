@@ -10,7 +10,7 @@
         <h2 class="text-info">Customers</h2>
     </div>
     <div class="col-3 offset-3">
-        <a asp-action="New" asp-controller="Movies" class="btn btn-info form-control text-white">
+        <a asp-action="New" asp-controller="Movies" class="btn btn-info form-control text-white cursor-pointer">
             Add New Movie
         </a>
     </div>
@@ -33,7 +33,7 @@
                 @foreach (var movie in Model)
                 {
                 <tr>
-                    <td><a href='/Movies/Edit/@movie.Id' style='cursor:pointer;width:70px'>@movie.Name</a></td>
+                    <td><a href="/Movies/Edit/@movie.Id" class="cursor-pointer">@movie.Name</a></td>
                     <td>@movie.Genre.Name</td>
                 </tr>
                 }

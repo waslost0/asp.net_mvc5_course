@@ -10,7 +10,7 @@
         <h2 class="text-info">Customers</h2>
     </div>
     <div class="col-3 offset-3">
-        <a asp-action="New" asp-controller="Customers" class="btn btn-info form-control text-white">
+        <a  asp-action="New" asp-controller="Customers" class="btn btn-info form-control text-white cursor-pointer">
             Add New Customer
         </a>
     </div>
@@ -33,7 +33,7 @@
                 @foreach (var customer in Model)
                 {
                 <tr>
-                    <td><a href='/Customers/Edit/@customer.Id' style='cursor:pointer;width:70px'>@customer.Name</a></td>
+                    <td class="cursor-pointer"><a href="/Customers/Edit/@customer.Id">@customer.Name</a></td>
                     <td>@customer.MembershipType.DiscountRate%</td>
                     <td>@customer.MembershipType.Name</td>
                 </tr>

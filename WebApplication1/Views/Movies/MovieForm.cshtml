@@ -38,13 +38,15 @@
         <div class="form-group row">
             <div class="col-4">
                 <label asp-for="Movie.GenreId">Genre</label>
+
             </div>
 
             <div class="col-8">
                 <select style="width:100%;padding:6px" asp-for="Movie.GenreId"
                         asp-items="@(new SelectList(Model.Genres,"Id","Name"))">
-                    <option>Please select one</option>
+                    <option value="">Select Genre</option>
                 </select>
+                <span asp-validation-for="Movie.GenreId" class="text-danger"></span>
             </div>
         </div>
 

@@ -84,9 +84,23 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public IActionResult Save(Movie movie)
         {
+
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormViewModel
+                {
+
+                    Movie = movie,
+                    Genres = _db.Genres.ToList()
+                };
+
+                return View("MovieForm", viewModel);
+            }
+            
+
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;
@@ -95,12 +109,6 @@ namespace WebApplication1.Controllers
             else
             {
                 _db.Movies.Update(movie);
-                //var customerInDb = _db.Customers.Single(c => c.Id == customer.Id);
-
-                //customerInDb.Name = customer.Name;
-                //customerInDb.Birthdate = customer.Birthdate;
-                //customerInDb.MembershipType = customer.MembershipType;
-                //customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
             }
 
             _db.SaveChanges();

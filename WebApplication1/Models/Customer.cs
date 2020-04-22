@@ -23,6 +23,7 @@ namespace WebApplication1.Models
 
         public MembershipType MembershipType { get; set; }
 
+        [Required(ErrorMessage = "The Membership Type field is required.")]
         public byte MembershipTypeId { get; set; }
 
 
