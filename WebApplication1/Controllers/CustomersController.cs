@@ -29,16 +29,14 @@ namespace WebApplication1.Controllers
                 Customer = customer
             };
 
-
             return View("CustomerForm", viewModel);
         }
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Save(Customer customer)
         {
-
-
             if (!ModelState.IsValid)
             {
                 var viewModel = new CustomerFormViewModel
@@ -46,7 +44,7 @@ namespace WebApplication1.Controllers
 
                     Customer = customer,
                     MembershipTypes = _db.MembershipTypes.ToList()
-            };
+                };
 
                 return View("CustomerForm", viewModel);
             }
@@ -58,12 +56,6 @@ namespace WebApplication1.Controllers
             else
             {
                 _db.Customers.Update(customer);
-                //var customerInDb = _db.Customers.Single(c => c.Id == customer.Id);
-
-                //customerInDb.Name = customer.Name;
-                //customerInDb.Birthdate = customer.Birthdate;
-                //customerInDb.MembershipType = customer.MembershipType;
-                //customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
             }
 
             _db.SaveChanges();
@@ -101,17 +93,6 @@ namespace WebApplication1.Controllers
 
             return View("CustomerForm", viewModel);
         }
-
-
-        #region APICalls
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var data = await _db.Customers.Include(u => u.MembershipType).ToListAsync(); 
-
-            return Json(new { data = await _db.Customers.ToListAsync() });
-        }
-        #endregion
 
     }
 }

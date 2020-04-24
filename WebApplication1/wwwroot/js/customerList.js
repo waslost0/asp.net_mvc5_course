@@ -5,11 +5,14 @@ $(document).ready(function () {
 })
 
 function loadDataTable() {
+
+
     dataTable = $('#DT_load').dataTable({
         "ajax": {
-            "url": "/Customers/getall",
+            "url": "/api/customers",
             "type": "GET",
-            "datatype": "json"
+            "datatype": "json",
+            "dataSrc": ""
         },
         "columns": [
             {
