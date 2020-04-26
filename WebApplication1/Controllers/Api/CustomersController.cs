@@ -43,7 +43,7 @@ namespace WebApplication1.Controllers.Api
 
 
         // GET: api/Customers/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult GetCustomer(int id)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDto>());
@@ -67,7 +67,7 @@ namespace WebApplication1.Controllers.Api
         public IActionResult CreateCustomer(Customer customer)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             _repo.CreateCustomer(customer);
 
@@ -97,9 +97,9 @@ namespace WebApplication1.Controllers.Api
         public IActionResult DeleteCustomer(int id)
         {
             if (!_repo.DeleteCustomer(id))
-                return BadRequest();
+                return new NotFoundObjectResult(new { error = "Customer not found.", id });
 
-            return new OkObjectResult(id) { StatusCode = 201};
+            return new OkObjectResult(new { id, result = "Customer was deleted." }) { StatusCode = 201};
         }
     }
 
