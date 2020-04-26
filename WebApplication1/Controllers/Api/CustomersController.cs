@@ -97,9 +97,9 @@ namespace WebApplication1.Controllers.Api
         public IActionResult DeleteCustomer(int id)
         {
             if (!_repo.DeleteCustomer(id))
-                return new NotFoundObjectResult(new { error = "Customer not found.", id });
+                return new NotFoundObjectResult(new { success = false, message = "Customer not found.", id });
 
-            return new OkObjectResult(new { id, result = "Customer was deleted." }) { StatusCode = 201};
+            return new OkObjectResult(new { success = true, id, message = "Customer deleted." }) { StatusCode = 201};
         }
     }
 

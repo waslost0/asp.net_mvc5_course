@@ -9,7 +9,7 @@ function loadDataTable() {
 
     dataTable = $('#DT_load').dataTable({
         "ajax": {
-            "url": "/api/customers",
+            "url": "/api/movies",
             "type": "GET",
             "datatype": "json",
             "dataSrc": ""
@@ -17,28 +17,22 @@ function loadDataTable() {
         "columns": [
             {
                 "data": function (data) {
-                    return `<td><a href='/Customers/Edit/${data.id}' style='cursor:pointer;'>${data.name}</a></td>`
+                    return `<td><a href='/movies/edit/${data.id}' style='cursor:pointer;'>${data.name}</a></td>`
                 },
                 "width": "20%"
             },
-            {
-                "data": "membershipType.discountRate",
-                "render": function (data) {
-                    return data + "%"
-
-                },
-                "width": "20%"
-            },
-            { "data": "membershipType.name", "width": "20%" },
+            {"data": "genre.name", "width": "20%" },
+            { "data": "releaseDate", "width": "20%" },
+             { "data": "numberInStock", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/Customers/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer;width:70px">
+                                <a href="/movies/edit/${data}" class="btn btn-success text-white" style="cursor:pointer;width:70px">
                                      Edit
                                 </a>
                                 <a class='btn btn-danger text-white' style='cursor:pointer;width:100px'
-                                    onclick=Delete('/api/customers/delete?id=${data}')>
+                                    onclick=Delete('/api/movies/delete?id=${data}')>
                                     Delete
                                 </a>
                             </div>`
@@ -80,7 +74,4 @@ function Delete(url) {
             });
         }
     });
-
-
-
 }

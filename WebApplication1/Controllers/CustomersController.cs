@@ -94,5 +94,16 @@ namespace WebApplication1.Controllers
             return View("CustomerForm", viewModel);
         }
 
+        public IActionResult Delete(int id)
+        {
+            var customer = _db.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return NotFound();
+            _db.Customers.Remove(customer);
+            _db.SaveChanges();
+
+            return View("Index");
+        }
+
     }
 }

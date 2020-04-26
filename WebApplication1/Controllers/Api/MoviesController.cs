@@ -81,9 +81,9 @@ namespace WebApplication1.Controllers.Api
         public IActionResult DeleteMovie(int id)
         {
             if (!_repo.DeleteMovie(id))
-                return new NotFoundObjectResult(new { error = "Movie not found.", id });
+                return new NotFoundObjectResult(new { success = false, message = "Movie not found.", id });
 
-            return new OkObjectResult(new { id, result = "Movie was deleted." }) { StatusCode = 201 };
+            return new OkObjectResult(new { success = true, id, message = "Movie deleted." }) { StatusCode = 201 };
         }
 
 
