@@ -17,7 +17,7 @@ function loadDataTable() {
         "columns": [
             {
                 "data": function (data) {
-                    return `<td><a href='/Customers/Edit/${data.id}' style='cursor:pointer;'>${data.name}</a></td>`
+                    return `<td><a href='/customers/edit/${data.id}' style='cursor:pointer;'>${data.name}</a></td>`
                 },
                 "width": "20%"
             },
@@ -34,7 +34,7 @@ function loadDataTable() {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/Customers/Edit/${data}" class="btn btn-success text-white" style="cursor:pointer;width:70px">
+                                <a href="/customers/edit/${data}" class="btn btn-success text-white" style="cursor:pointer;width:70px">
                                      Edit
                                 </a>
                                 <a class='btn btn-danger text-white' style='cursor:pointer;width:100px'

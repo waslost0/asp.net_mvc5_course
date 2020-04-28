@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,5 +16,6 @@ namespace WebApplication1.Data.Interfaces
         bool UpdateCustomer(int id, Customer customer);
 
         bool DeleteCustomer(int id);
+
     }
 }

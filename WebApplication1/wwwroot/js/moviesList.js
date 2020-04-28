@@ -21,9 +21,9 @@ function loadDataTable() {
                 },
                 "width": "20%"
             },
-            {"data": "genre.name", "width": "20%" },
+            { "data": "genre.name", "width": "20%" },
             { "data": "releaseDate", "width": "20%" },
-             { "data": "numberInStock", "width": "20%" },
+            { "data": "numberInStock", "width": "20%" },
             {
                 "data": "id",
                 "render": function (data) {
@@ -38,8 +38,7 @@ function loadDataTable() {
                             </div>`
                 },
                 "width": "40%",
-                
-}
+            }
         ],
         "language": {
             "emptyTable": "no data found"

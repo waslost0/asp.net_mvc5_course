@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,12 +44,13 @@ namespace WebApplication1.Data.Repositories
         public bool UpdateCustomer(int id, Customer customer)
         {
        
-            var customerInDb = _db.Customers.SingleOrDefault(c => c.Id == id);
+            var customerInDb = _db.Customers.AsNoTracking().SingleOrDefault(c => c.Id == id);
 
             if (customerInDb == null)
             {
                 return false;
             }
+
 
             _db.Customers.Update(customer);
             _db.SaveChanges();
