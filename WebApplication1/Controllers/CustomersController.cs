@@ -13,6 +13,7 @@ using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class CustomersController : Controller
     {
         private readonly ICustomersRepository _repo;
@@ -67,7 +68,8 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "Customers");
         }
 
-        [Authorize]
+
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var customers = _repo.GetAll();

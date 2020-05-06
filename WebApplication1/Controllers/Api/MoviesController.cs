@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
@@ -14,6 +15,7 @@ namespace WebApplication1.Controllers.Api
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class MoviesController : ControllerBase
     {
         readonly IMoviesRepository _repo;
@@ -26,6 +28,7 @@ namespace WebApplication1.Controllers.Api
 
         // GET: api/movies
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
             var movies = _repo.GetAll();
@@ -34,6 +37,7 @@ namespace WebApplication1.Controllers.Api
 
         // GET api/movies/1
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetMovie(int id)
         {
             var movie = _repo.GetMovie(id);

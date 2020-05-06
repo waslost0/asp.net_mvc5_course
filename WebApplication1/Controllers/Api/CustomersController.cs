@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,6 +19,7 @@ namespace WebApplication1.Controllers.Api
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class CustomersController : ControllerBase
     {
         readonly ICustomersRepository _repo;
@@ -29,6 +31,7 @@ namespace WebApplication1.Controllers.Api
 
         // GET: api/Customers
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetAll()
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDto>());
@@ -44,6 +47,7 @@ namespace WebApplication1.Controllers.Api
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetCustomer(int id)
         {
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerDto>());

@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Data.Models;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize(Policy = "RequireAdministratorRole")]
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -19,6 +22,7 @@ namespace WebApplication1.Controllers
             _db = db;
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IActionResult Random()
         {
             var movie = new Movie() { Name = "Shrek" };
@@ -37,7 +41,7 @@ namespace WebApplication1.Controllers
             return View(viewMovel);
         }
 
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var movies = _db.Movies.Include(m => m.Genre).ToList();
@@ -45,6 +49,13 @@ namespace WebApplication1.Controllers
             {
                 return NotFound();
             }
+
+            if (!User.IsInRole("Admin")) 
+            {
+                return View("ReadOnlyList", movies);
+            }
+          
+       
             return View(movies);
         }
 
